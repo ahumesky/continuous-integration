@@ -133,3 +133,8 @@ RUN apt-get -qqy update && \
     apt-get -qqy install --no-install-recommends openjdk-11-jdk && \
     rm -rf /var/lib/apt/lists/*
 ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+
+FROM ubuntu1804-java11 AS ubuntu1804-java11-kythe
+RUN curl -sSL https://github.com/kythe/kythe/releases/download/v0.0.44/kythe-v0.0.44.tar.gz | \
+    tar --no-same-owner --strip-components 1 -xvz --directory /opt/kythe && \
+    test -f /opt/kythe/WORKSPACE
